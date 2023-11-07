@@ -182,7 +182,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Online market server is running')
+    res.send('Online market server is running correct')
 })
 
 app.listen(port, () => {
