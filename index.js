@@ -220,7 +220,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Online market server is running ok ')
+    res.send('Online market server is running  ')
 })
 
 app.listen(port, () => {
