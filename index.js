@@ -155,10 +155,48 @@ app.put('/online/:id', async(req, res) => {
 
 // update section end
 
+// request update work start
 
 
+app.patch('/bit/:id', async(request, response) => {
+  const id = request.params.id
+  const query = { _id: new ObjectId(id) }
+
+  const updateStatue = {
+    $set: {
+     status: request.body.status,
+    },
+  };
+  const result = await bitCollection.updateOne(query, updateStatue);
+  response.send(result);
+});
+app.patch('/bit/:id', async(request, response) => {
+  const id = request.params.id
+  const query = { _id: new ObjectId(id) }
+
+  const updateStatue = {
+    $set: {
+     status: request.body.status,
+    },
+  };
+  const result = await bitCollection.updateOne(query, updateStatue);
+  response.send(result);
+});
 
 
+// app.get('/BidRequest', async (req, res) => {
+//   try {
+//     const query = {};
+//     if (req.query.Byeremail) {
+//       query.Byeremail = req.query.Byeremail;
+//     }
+//     const result = await mybids.find(query).toArray();
+//     res.send(result);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
 
 
 
@@ -182,7 +220,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Online market server is running (ok) ')
+    res.send('Online market server is running ')
 })
 
 app.listen(port, () => {
