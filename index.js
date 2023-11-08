@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
@@ -42,6 +43,15 @@ const jobCollection = client.db('jobDB').collection('job');
 const bitCollection = client.db('jobDB').collection('bit');
  
 
+// jwt work token
+app.post('/jwt', async(req, res) =>{
+  const user = req.body;
+  console.log(user);
+  res.send(user);
+  const token = jwt.sign(user, 'secret', {expiresIn: '1h'})
+  res.send(token)
+});
+// jwt work end
 // step--2
 
 app.get('/online', async (req, res) => {
@@ -220,7 +230,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Online market server is running  ')
+    res.send('Online market server is running ok ')
 })
 
 app.listen(port, () => {
