@@ -11,7 +11,13 @@ const port = process.env.PORT || 5000;
 
 // middleware
 
-app.use(cors());
+const corsOptions ={
+  origin:'*', 
+  credentials:true,
+  optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions))
 app.use(express.json());
 
 
@@ -36,7 +42,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
 // data pathanor work start
 const jobCollection = client.db('jobDB').collection('job');
@@ -44,13 +50,13 @@ const bitCollection = client.db('jobDB').collection('bit');
  
 
 // jwt work token
-app.post('/jwt', async(req, res) =>{
-  const user = req.body;
-  console.log(user);
-  res.send(user);
-  const token = jwt.sign(user, 'secret', {expiresIn: '1h'})
-  res.send({token})
-});
+// app.post('/jwt', async(req, res) =>{
+//   const user = req.body;
+//   console.log(user);
+//   res.send(user);
+//   const token = jwt.sign(user, 'secret', {expiresIn: '1h'})
+//   res.send({token})
+// });
 // jwt work end
 // step--2
 
@@ -215,7 +221,7 @@ app.patch('/bit/:id', async(request, response) => {
 
 
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
